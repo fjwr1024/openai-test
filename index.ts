@@ -8,6 +8,8 @@ if (!apiKey) {
   throw new Error("APIキーが設定されていません。");
 }
 
+console.log(apiKey);
+
 const clientOptions: ClientOptions = {
   apiKey: apiKey,
 };
