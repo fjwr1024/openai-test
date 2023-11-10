@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv";
+import * as fs from "fs";
 import OpenAI, { ClientOptions } from "openai";
 
 dotenv.config();
@@ -17,14 +18,10 @@ const clientOptions: ClientOptions = {
 const openai = new OpenAI(clientOptions);
 
 async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "gpt-3.5-turbo",
+  const file = await openai.files.create({
+    file: fs.createReadStream("mydata.jsonl"),
+    purpose: "fine-tune",
   });
-
-  console.log(completion);
-  console.log(completion.choices[0]);
-  console.log(completion.choices[0].message);
 }
 
 main();
