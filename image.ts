@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import * as fs from "fs";
+import util from "util";
 import OpenAI, { ClientOptions } from "openai";
 
 dotenv.config();
@@ -17,7 +18,7 @@ const clientOptions: ClientOptions = {
 
 const openai = new OpenAI(clientOptions);
 
-function encodeImageToBase64(filePath) {
+function encodeImageToBase64(filePath: any) {
   return fs.readFileSync(filePath, { encoding: "base64" });
 }
 
@@ -28,11 +29,12 @@ async function main() {
 
   const response = await openai.chat.completions.create({
     model: "gpt-4-vision-preview",
+    max_tokens: 500,
     messages: [
       {
         role: "user",
         content: [
-          { type: "text", text: "What are in these images? Is there any difference between them?" },
+          { type: "text", text: "test" },
           {
             type: "image_url",
             image_url: {
@@ -43,7 +45,7 @@ async function main() {
       },
     ],
   });
-  console.log(response);
-  console.log(response.choices[0]);
+  console.log(util.inspect(response, { showHidden: false, depth: null, colors: true }));
+  console.log(util.inspect(response.choices[0], { showHidden: false, depth: null, colors: true }));
 }
 main();
