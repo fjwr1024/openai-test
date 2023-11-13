@@ -17,7 +17,15 @@ const clientOptions: ClientOptions = {
 
 const openai = new OpenAI(clientOptions);
 
+function encodeImageToBase64(filePath) {
+  return fs.readFileSync(filePath, { encoding: "base64" });
+}
+
 async function main() {
+  const imagePath = "./images/sample.png";
+
+  const base64Image = encodeImageToBase64(imagePath);
+
   const response = await openai.chat.completions.create({
     model: "gpt-4-vision-preview",
     messages: [
@@ -28,7 +36,7 @@ async function main() {
           {
             type: "image_url",
             image_url: {
-              url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+              url: `data:image/png;base64,${base64Image}`,
             },
           },
         ],
