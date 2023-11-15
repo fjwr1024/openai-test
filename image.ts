@@ -1,22 +1,6 @@
-import * as dotenv from "dotenv";
 import * as fs from "fs";
 import util from "util";
-import OpenAI, { ClientOptions } from "openai";
-
-dotenv.config();
-
-const apiKey = process.env.OPENAI_API_KEY;
-if (!apiKey) {
-  throw new Error("APIキーが設定されていません。");
-}
-
-console.log(apiKey);
-
-const clientOptions: ClientOptions = {
-  apiKey: apiKey,
-};
-
-const openai = new OpenAI(clientOptions);
+import openaiClient from "./shared/openapi-client";
 
 function encodeImageToBase64(filePath: any) {
   return fs.readFileSync(filePath, { encoding: "base64" });
@@ -24,10 +8,9 @@ function encodeImageToBase64(filePath: any) {
 
 async function main() {
   const imagePath = "./images/sample.png";
-
   const base64Image = encodeImageToBase64(imagePath);
 
-  const response = await openai.chat.completions.create({
+  const response = await openaiClient.chat.completions.create({
     model: "gpt-4-vision-preview",
     max_tokens: 500,
     messages: [
