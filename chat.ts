@@ -1,16 +1,15 @@
-import * as dotenv from "dotenv";
-import OpenAI, { ClientOptions } from "openai";
-import openaiClient from "./shared/openapi-client";
+import openaiClient from './shared/openapi-client';
 
-async function sendMessage() {
+async function sendMessage(messageText: string) {
   const completion = await openaiClient.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "gpt-3.5-turbo",
+    messages: [{ role: 'system', content: inputText }],
+    model: 'gpt-4-1106-preview',
+    max_tokens: 500,
   });
 
   console.log(completion);
-  console.log(completion.choices[0]);
   console.log(completion.choices[0].message);
 }
 
-sendMessage();
+const inputText = process.argv[2];
+sendMessage(inputText);
