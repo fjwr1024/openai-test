@@ -6,7 +6,7 @@ function encodeImageToBase64(filePath: any) {
   return fs.readFileSync(filePath, { encoding: "base64" });
 }
 
-async function main() {
+async function uploadImage() {
   const imagePath = "./images/sample.png";
   const base64Image = encodeImageToBase64(imagePath);
 
@@ -31,4 +31,4 @@ async function main() {
   console.log(util.inspect(response, { showHidden: false, depth: null, colors: true }));
   console.log(util.inspect(response.choices[0], { showHidden: false, depth: null, colors: true }));
 }
-main();
+uploadImage();

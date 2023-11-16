@@ -1,1 +1,5 @@
-export type OpenAIModel = "text-davinci-003" | "text-curie-001" | "text-babbage-001" | "text-ada-001";
+export type OpenAIModel =
+  | 'gpt-4-1106-preview'
+  | 'gpt-4-vision-preview'
+  | 'gpt-3.5-turbo-1106'
+  | 'gpt-3.5-turbo';

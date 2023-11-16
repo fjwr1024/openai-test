@@ -1,11 +1,11 @@
-import * as dotenv from "dotenv";
-import OpenAI, { ClientOptions } from "openai";
+import * as dotenv from 'dotenv';
+import OpenAI, { ClientOptions } from 'openai';
 
 dotenv.config();
 
 const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey) {
-  throw new Error("APIキーが設定されていません。");
+  throw new Error('APIキーが設定されていません。');
 }
 
 const clientOptions: ClientOptions = {
