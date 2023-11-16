@@ -1,25 +1,32 @@
-import * as fs from "fs";
-import util from "util";
-import openaiClient from "./shared/openapi-client";
+////////////////////////////////
+// command : ts-node image.ts "Enter your text here"
+// Description: OpenAI API - Image Chat
+////////////////////////////////
+
+import * as fs from 'fs';
+import util from 'util';
+import openaiClient from './shared/openapi-client';
 
 function encodeImageToBase64(filePath: any) {
-  return fs.readFileSync(filePath, { encoding: "base64" });
+  return fs.readFileSync(filePath, { encoding: 'base64' });
 }
 
 async function uploadImage() {
-  const imagePath = "./images/sample.png";
+  const imagePath = './images/sample.png';
   const base64Image = encodeImageToBase64(imagePath);
 
+  const inputText = process.argv[2];
+
   const response = await openaiClient.chat.completions.create({
-    model: "gpt-4-vision-preview",
+    model: 'gpt-4-vision-preview',
     max_tokens: 500,
     messages: [
       {
-        role: "user",
+        role: 'user',
         content: [
-          { type: "text", text: "test" },
+          { type: 'text', text: inputText },
           {
-            type: "image_url",
+            type: 'image_url',
             image_url: {
               url: `data:image/png;base64,${base64Image}`,
             },
