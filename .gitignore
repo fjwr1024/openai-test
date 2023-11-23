@@ -6,3 +6,6 @@
 
 # image
 /images
+
+# constants
+/shared/constants

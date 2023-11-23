@@ -1,6 +1,6 @@
 import openaiClient from './shared/openapi-client';
 
-async function sendMessage(messageText: string) {
+async function sendMessage() {
   const completion = await openaiClient.chat.completions.create({
     messages: [{ role: 'system', content: inputText }],
     model: 'gpt-4-1106-preview',
@@ -12,4 +12,4 @@ async function sendMessage(messageText: string) {
 }
 
 const inputText = process.argv[2];
-sendMessage(inputText);
+sendMessage();

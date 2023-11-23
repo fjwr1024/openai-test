@@ -1,6 +1,5 @@
 ////////////////////////////////
 // command : ts-node image.ts "Enter your text here"
-// Description: OpenAI API - Image Chat
 ////////////////////////////////
 
 import * as fs from 'fs';
