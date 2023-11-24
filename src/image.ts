@@ -1,5 +1,5 @@
 ////////////////////////////////
-// command : ts-node image.ts "Enter your text here" "sample.png"
+// command : ts-node ./src/image.ts "Enter your text here" "sample.png"
 ////////////////////////////////
 
 import * as fs from 'fs';
@@ -69,4 +69,6 @@ if (!imageName) {
 }
 
 const imagePath = `./images/${imageName}`;
-uploadImage(imagePath, inputText);
+uploadImage(imagePath, inputText)
+  .then(() => console.log('Message sent successfully'))
+  .catch(error => console.error('Failed to send message:', error));
