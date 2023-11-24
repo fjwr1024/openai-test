@@ -3,7 +3,8 @@
 ////////////////////////////////
 
 import * as fs from 'fs';
-import util from 'util';
+import * as util from 'util';
+
 import openaiClient from './shared/openapi-client';
 import { validateFishType } from './utils/validate-fishtype';
 
@@ -38,12 +39,13 @@ export const uploadImage = async (imagePath: string, inputText: string) => {
         },
       ],
     });
-    console.log(util.inspect(response, { showHidden: false, depth: null, colors: true }));
     console.log(
-      util.inspect(response.choices[0], { showHidden: false, depth: null, colors: true })
+      '# response',
+      util.inspect(response, { showHidden: false, depth: null, colors: true })
     );
+
     console.log('# message', response.choices[0].message);
-    const isValidFishType = validateFishType(response.choices[0].message.content );
+    const isValidFishType = validateFishType(response.choices[0].message.content);
     console.log('#, isValidFishType', isValidFishType);
 
     return response.choices[0].message.content;
