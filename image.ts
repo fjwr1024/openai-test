@@ -5,6 +5,7 @@
 import * as fs from 'fs';
 import util from 'util';
 import openaiClient from './shared/openapi-client';
+import { validateFishType } from './shared/constants/constants';
 
 function encodeImageToBase64(filePath: string) {
   try {
@@ -15,7 +16,7 @@ function encodeImageToBase64(filePath: string) {
   }
 }
 
-async function uploadImage(imagePath: string, inputText: string) {
+export const uploadImage = async (imagePath: string, inputText: string) => {
   const base64Image = encodeImageToBase64(imagePath);
 
   try {
@@ -41,11 +42,16 @@ async function uploadImage(imagePath: string, inputText: string) {
     console.log(
       util.inspect(response.choices[0], { showHidden: false, depth: null, colors: true })
     );
+    console.log('# message', response.choices[0].message);
+    const isValidFishType = validateFishType(response.choices[0].message);
+    console.log('#, isValidFishType', isValidFishType);
+
+    return response.choices[0].message.content;
   } catch (error) {
     console.error('Failed to send the request to OpenAI:', error);
     process.exit(1);
   }
-}
+};
 
 const inputText = process.argv[2];
 if (!inputText) {
