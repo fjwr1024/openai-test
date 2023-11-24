@@ -5,7 +5,7 @@
 import * as fs from 'fs';
 import util from 'util';
 import openaiClient from './shared/openapi-client';
-import { validateFishType } from './utils/fishtype';
+import { validateFishType } from './utils/validate-fishtype';
 
 function encodeImageToBase64(filePath: string) {
   try {
