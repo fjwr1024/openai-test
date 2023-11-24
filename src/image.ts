@@ -1,5 +1,5 @@
 ////////////////////////////////
-// command : ts-node image.ts "Enter your text here"
+// command : ts-node image.ts "Enter your text here" "sample.png"
 ////////////////////////////////
 
 import * as fs from 'fs';
@@ -54,10 +54,16 @@ export const uploadImage = async (imagePath: string, inputText: string) => {
 };
 
 const inputText = process.argv[2];
+const imageName = process.argv[3];
 if (!inputText) {
   console.error('Please provide the text for analysis.');
   process.exit(1);
 }
 
-const imagePath = './images/sample.png';
+if (!imageName) {
+  console.error('Please provide the path of the image.');
+  process.exit(1);
+}
+
+const imagePath = `./images/${imageName}`;
 uploadImage(imagePath, inputText);
