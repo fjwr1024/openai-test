@@ -43,7 +43,7 @@ export const uploadImage = async (imagePath: string, inputText: string) => {
       util.inspect(response.choices[0], { showHidden: false, depth: null, colors: true })
     );
     console.log('# message', response.choices[0].message);
-    const isValidFishType = validateFishType(response.choices[0].message);
+    const isValidFishType = validateFishType(response.choices[0].message.content);
     console.log('#, isValidFishType', isValidFishType);
 
     return response.choices[0].message.content;
