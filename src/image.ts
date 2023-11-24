@@ -43,7 +43,7 @@ export const uploadImage = async (imagePath: string, inputText: string) => {
       util.inspect(response.choices[0], { showHidden: false, depth: null, colors: true })
     );
     console.log('# message', response.choices[0].message);
-    const isValidFishType = validateFishType(response.choices[0].message.content as string);
+    const isValidFishType = validateFishType(response.choices[0].message.content );
     console.log('#, isValidFishType', isValidFishType);
 
     return response.choices[0].message.content;
@@ -55,6 +55,7 @@ export const uploadImage = async (imagePath: string, inputText: string) => {
 
 const inputText = process.argv[2];
 const imageName = process.argv[3];
+
 if (!inputText) {
   console.error('Please provide the text for analysis.');
   process.exit(1);
