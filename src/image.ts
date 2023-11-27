@@ -1,7 +1,6 @@
 ////////////////////////////////
 // command : ts-node ./src/image.ts "Enter your text here" "sample.png"
 ////////////////////////////////
-
 import * as fs from 'fs';
 import * as util from 'util';
 
